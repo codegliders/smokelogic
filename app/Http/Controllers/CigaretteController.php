@@ -39,20 +39,17 @@ class CigaretteController extends Controller {
     public function index(Request $request) {
         $user=  Auth::user();
         $count=  Cigarette::getTodayCigarettes();
-//         $today=date('Y-m-d');
-//        $cigs=DB::table('cigarettes')->where('user_id', $user->id)->where('date',$today)->get();
-//        $i=0;
-//        dd($cigs);
-//        foreach ($cigs as $c){
-//            $i++;
-//        }
-//        $count=$i;
+
+           $weekCigarettes=Cigarette::getWeekCigarettes();
+        $monthCigarettes=Cigarette::getMonthCigarettes();
         $cigarettes=DB::table('cigarettes')->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(15);
        // dd($cigarettes);
         return view('cigarettes.index', [
             //'cigarettes' => $this->cigarettes->forUser($request->user()),
             'cigarettes' => $cigarettes,
             'count'=>$count,
+            'weekcigarettes'=>$weekCigarettes,
+            'monthcigarettes'=>$monthCigarettes,
         ]);
     }
 
@@ -102,6 +99,13 @@ class CigaretteController extends Controller {
     public function getBarChartDataLastTwoWeeks() {
         $data = Cigarette::getBarChartLastTwoWeeks();
         return($data);
+    }
+    
+  
+    
+    public function getWeekCigarettes(){
+        $data=  Cigarette::getWeekCigarettes();
+        return $data;
     }
 
 }

@@ -67,21 +67,78 @@ class Cigarette extends Model {/**
         return($data);
     }
 
-    
-    public static function getTodayCigarettes(){
-        $count=0;
-        $user=  Auth::user();
-        $today=date('Y-m-d');
-        
-        $cigarettes=DB::table('cigarettes')->where('user_id', $user->id)->where('date',$today)->get();
-        $i=0;
-        
-       
-        foreach ($cigarettes as $cig){
+    public static function getTodayCigarettes() {
+        $count = 0;
+        $user = Auth::user();
+        $today = date('Y-m-d');
+
+        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->where('date', $today)->get();
+        $i = 0;
+
+
+        foreach ($cigarettes as $cig) {
             $i++;
         }
-        $count=  $i;//count($cigarettes);
+        $count = $i; //count($cigarettes);
         return $count;
     }
+
+    public static function getWeekCigarettes() {
+        $count = 0;
+        $user = Auth::user();
+        $today = date('Y-m-d');
+        $oneWeekAgo = date('Y-m-d', strtotime("-1 week"));
+        $datePrevious = null;
+        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array( $oneWeekAgo,$today))->get();
+        $days = 0;
+
+
+        foreach ($cigarettes as $cig) {
+            if($cig->date!==$datePrevious){
+                $days++;
+            }
+            
+            for ($i=0; $i<7; $i++) {
+                $day = date('Y-m-d', strtotime("-" . $i . " day"));
+                if ($cig->date == $day) {
+                    $count++;
+                } 
+                
+            }
+            $datePrevious=$cig->date;
+        }
+        $cigByDay=$count/$days;
+      
+        return round($cigByDay,0);
+    }
     
+    public static function getMonthCigarettes() {
+        $count = 0;
+        $user = Auth::user();
+        $today = date('Y-m-d');
+        $oneMonthAgo = date('Y-m-d', strtotime("-1 month"));
+        $datePrevious = null;
+        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array( $oneMonthAgo,$today))->get();
+        $days = 0;
+
+
+        foreach ($cigarettes as $cig) {
+            if($cig->date!==$datePrevious){
+                $days++;
+            }
+            
+            for ($i=0; $i<7; $i++) {
+                $day = date('Y-m-d', strtotime("-" . $i . " day"));
+                if ($cig->date == $day) {
+                    $count++;
+                } 
+                
+            }
+            $datePrevious=$cig->date;
+        }
+        $cigByDay=$count/$days;
+      
+        return round($cigByDay,0);
+    }
+
 }

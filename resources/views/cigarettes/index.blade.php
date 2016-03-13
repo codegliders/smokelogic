@@ -38,6 +38,16 @@
                 <div class="col-sm-3" style="font-size:20px;color:#fff;font-weight: bold;"><span style="font-size:64px">{{$count}}</span> today </div>
 
             </div>
+            <div class="row">
+                <div class="col col-sm-6 col-xs-6" style="font-size:20px;color:#fff;font-weight: bold;">
+                                  <span style="font-size:28px">{{$weekcigarettes}}/day</span> this week
+
+                </div>
+                <div class="col col-sm-6 col-xs-6" style="font-size:20px;color:#fff;font-weight: bold;">
+                                  <span style="font-size:28px">{{$monthcigarettes}}/day</span> this month
+
+                </div>
+            </div>
         </form>
     </div>
     <div class="panel panel-info">
