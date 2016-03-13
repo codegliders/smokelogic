@@ -86,7 +86,7 @@ class Cigarette extends Model {/**
     public static function getWeekCigarettes() {
         $count = 0;
         $user = Auth::user();
-        $today = date('Y-m-d');
+        $today = date('Y-m-d', strtotime("-1 day"));
         $oneWeekAgo = date('Y-m-d', strtotime("-1 week"));
         $datePrevious = null;
         $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array( $oneWeekAgo,$today))->get();
@@ -98,7 +98,7 @@ class Cigarette extends Model {/**
                 $days++;
             }
             
-            for ($i=0; $i<7; $i++) {
+            for ($i=1; $i<=7; $i++) {
                 $day = date('Y-m-d', strtotime("-" . $i . " day"));
                 if ($cig->date == $day) {
                     $count++;
@@ -115,7 +115,7 @@ class Cigarette extends Model {/**
     public static function getMonthCigarettes() {
         $count = 0;
         $user = Auth::user();
-        $today = date('Y-m-d');
+        $today = date('Y-m-d', strtotime("-1 day"));
         $oneMonthAgo = date('Y-m-d', strtotime("-1 month"));
         $datePrevious = null;
         $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array( $oneMonthAgo,$today))->get();
@@ -127,7 +127,7 @@ class Cigarette extends Model {/**
                 $days++;
             }
             
-            for ($i=0; $i<7; $i++) {
+            for ($i=1; $i<=30; $i++) {
                 $day = date('Y-m-d', strtotime("-" . $i . " day"));
                 if ($cig->date == $day) {
                     $count++;
