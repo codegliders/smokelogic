@@ -11,45 +11,76 @@
 
         <!-- New Task Form -->
         <form action="/cig" method="POST" id="frmcig" class="form-horizontal">
-            {{ csrf_field() }}
-
-            <div class="form-group">
-                <input type="hidden" name="cigarette" id="cigarette" value="1" class="form-control">
-
+            {{ csrf_field() }}    
+            <div class="row">
                 <div class="col-sm-12">
 
                     <label id="date-cont" class="control-label" style="color:#fff;font-size: 16px;"></label>
                     <input type="hidden" id="date" name="date" id="date" class="form-control">
                     <input type="hidden" id="time" name="time" id="time" class="form-control">
+                    <input type="hidden" name="cigarette" id="cigarette" value="1" class="form-control">
                 </div>
-
             </div>
 
+            <br />
 
             <!-- Add cigarette Button -->
             <div class="form-group">
-
-
-                <div class="col-sm-9">
-                    <span  class="btn btn-info btn-lg" id="btnaddcig">
-                        <i class="fa fa-plus"></i> Add Cigarette
-                    </span>
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <button  class="btn btn-info btn-lg" id="btnaddcig">
+                            <i class="fa fa-plus fa-lg"></i> Add Cigarette
+                        </button>
+                    </div>
                 </div>
-                <div class="col-sm-3" style="font-size:20px;color:#fff;font-weight: bold;"><span style="font-size:64px">{{$count}}</span> today </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-6 col-xs-6 info-text-md "><span class="info-value-md">{{$yesterdaycigarettes}}</span> yesterday </div>
+                <div class="col-sm-6 col-xs-6 info-text-md"><span class="info-value-lg">{{$count}}</span> today </div>
 
             </div>
+
             <div class="row">
-                <div class="col col-sm-6 col-xs-6" style="font-size:16px;color:#fff;font-weight: bold;">
-                                  <span style="font-size:24px">{{$weekcigarettes}}/day</span> this week
+                <div class="col col-sm-6 col-xs-6 info-text-md" >
+                    <span  class="info-value-md">{{$weekcigarettes}}/day</span> last 7 days
 
                 </div>
-                <div class="col col-sm-6 col-xs-6" style="font-size:16px;color:#fff;font-weight: bold;">
-                                  <span style="font-size:24px">{{$monthcigarettes}}/day</span> this month
+                <div class="col col-sm-6 col-xs-6 info-text-md" >
+                    <span  class="info-value-md">{{$monthcigarettes}}/day</span> last 30 days
 
                 </div>
             </div>
         </form>
     </div>
+    <!--div class="panel panel-info">
+        <div class="panel-heading">
+            Minutes between cigarettes today
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                 <div class="col col-sm-6">
+                    <div id="gauge2-container">
+                        <div id="gauge2"></div>
+                        <input id="gauge2-value" disabled="true" value="{ {$lastcigarettemin} }">
+                    </div>
+                    <div class="col col-md-6 center-block">  Minutes from last cigarette</div>
+
+                </div>
+                <div class="col col-sm-6">
+                    <div id="gauge-container">
+                        <div id="gauge"></div>
+                        <input id="gauge-value" disabled="true" value="{ {$minutesbycigarettes} }">
+                    </div>
+                    <div class="col col-md-6 center-block">  Minutes between all cigarettes today</div>
+
+                </div>
+               
+            </div>
+
+        </div>
+
+
+    </div-->
     <div class="panel panel-info">
         <div class="panel-heading">
             Last 15 days
@@ -60,6 +91,7 @@
 
 
     </div>
+
 
     @if (count($cigarettes) > 0)
     <div class="panel panel-info">

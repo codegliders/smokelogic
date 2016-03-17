@@ -68,18 +68,24 @@ class Cigarette extends Model {/**
     }
 
     public static function getTodayCigarettes() {
-        $count = 0;
+       
         $user = Auth::user();
         $today = date('Y-m-d');
 
         $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->where('date', $today)->get();
-        $i = 0;
+       
+        $count = count($cigarettes);
+        return $count;
+    }
 
+    public static function getYesterdayCigarettes() {
+      
+        $user = Auth::user();
+        $yesterday= date('Y-m-d', strtotime("-1 day"));
 
-        foreach ($cigarettes as $cig) {
-            $i++;
-        }
-        $count = $i; //count($cigarettes);
+        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->where('date', $yesterday)->get();
+     
+        $count =count($cigarettes);
         return $count;
     }
 
@@ -89,56 +95,105 @@ class Cigarette extends Model {/**
         $today = date('Y-m-d', strtotime("-1 day"));
         $oneWeekAgo = date('Y-m-d', strtotime("-1 week"));
         $datePrevious = null;
-        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array( $oneWeekAgo,$today))->get();
+        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array($oneWeekAgo, $today))->get();
         $days = 0;
 
 
         foreach ($cigarettes as $cig) {
-            if($cig->date!==$datePrevious){
+            if ($cig->date !== $datePrevious) {
                 $days++;
             }
-            
-            for ($i=1; $i<=7; $i++) {
+
+            for ($i = 1; $i <= 7; $i++) {
                 $day = date('Y-m-d', strtotime("-" . $i . " day"));
                 if ($cig->date == $day) {
                     $count++;
-                } 
-                
+                }
             }
-            $datePrevious=$cig->date;
+            $datePrevious = $cig->date;
         }
-        $cigByDay=$count/$days;
-      
-        return round($cigByDay,0);
+        $cigByDay = $count / $days;
+
+        return round($cigByDay, 0);
     }
-    
+
     public static function getMonthCigarettes() {
         $count = 0;
         $user = Auth::user();
         $today = date('Y-m-d', strtotime("-1 day"));
         $oneMonthAgo = date('Y-m-d', strtotime("-1 month"));
         $datePrevious = null;
-        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array( $oneMonthAgo,$today))->get();
+        $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->whereBetween('date', array($oneMonthAgo, $today))->get();
         $days = 0;
 
 
         foreach ($cigarettes as $cig) {
-            if($cig->date!==$datePrevious){
+            if ($cig->date !== $datePrevious) {
                 $days++;
             }
-            
-            for ($i=1; $i<=30; $i++) {
+
+            for ($i = 1; $i <= 30; $i++) {
                 $day = date('Y-m-d', strtotime("-" . $i . " day"));
                 if ($cig->date == $day) {
                     $count++;
-                } 
-                
+                }
             }
-            $datePrevious=$cig->date;
+            $datePrevious = $cig->date;
         }
-        $cigByDay=$count/$days;
-      
-        return round($cigByDay,0);
+        $cigByDay = $count / $days;
+
+        return round($cigByDay, 0);
     }
 
+    
+    public static function getCigarettesInMintesDuringDay(){
+        
+       $user = Auth::user();
+       $now=date('G:i:s');
+       $today=date('Y-m-d');
+       $minutesofday=1440;
+       $cigarettes = DB::table('cigarettes')->where('user_id', $user->id)->where('date',  $today)->get();
+       $cigcount=count($cigarettes);
+     
+       $minutessincemidnight=(time() - strtotime("today"))/60;
+       $rndminutessincemidnight=round($minutessincemidnight,0);
+       if($cigcount>0){
+       $minutesbycig=$rndminutessincemidnight/$cigcount;
+       $minutesbycig=  round($minutesbycig);
+       }else{$minutesbycig=0;}
+        return $minutesbycig;
+        
+    }
+    
+    public static function getCigarettesLastMinutes(){
+        
+       $user = Auth::user();
+       $now=date('G:i:s');
+       $today=date('Y-m-d');
+       $minutesofday=1440;
+       $cigarette = DB::table('cigarettes')->where('user_id', $user->id)->where('date',  $today)->max('time');
+       $cig=strtotime($cigarette);
+       $nw=  date('G:i:s');
+       $nw=strtotime($nw);
+     //  dd($nw ." ". $cig);
+       $diff=($cig - $nw )/60;
+       
+       //THIS DOES NOT WORK
+      // dd($nw . "   " .$cig);
+//       $diff=(strtotime($now)-strtotime($cigarette));
+//       $diff=date('H:i',$diff);
+//       $cigcount=count($cigarettes);
+//     
+//     
+
+      // $diff=(time() -strtotime($cigarette) )/60;
+      // $diff=round($diff,0);
+//       $rndminutessincemidnight=round($minutessincemidnight,0);
+//       if($cigcount>0){
+//       $minutesbycig=$rndminutessincemidnight/$cigcount;
+//       $minutesbycig=  round($minutesbycig);
+//       }else{$minutesbycig=0;}
+        return $diff;
+        
+    }
 }

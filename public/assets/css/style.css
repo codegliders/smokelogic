@@ -1,11 +1,48 @@
-/*
-Copyright Metamatic Lab
-Author:Paolo Anghileri
-Email:paolo@digitalminds.it
-*/
-/* 
-    Created on : Mar 10, 2016, 10:52:42 PM
-    Author     : paolo
-*/
 
-body{}
+.info-value-sm{
+    font-size:16px;
+}
+.info-value-md{
+    font-size:24px;
+}
+.info-value-lg{
+    font-size:64px;
+}
+.info-text-md{font-size:20px;
+              color:#fff;
+              font-weight: bold;
+}
+
+#gauge-container {
+    // background: transparent url("../content/dataviz/gauge/gauge-container-partial.png") no-repeat 50% 50%;
+
+    text-align: center;
+    margin: 0 auto 30px auto;
+}
+
+#gauge {
+
+    margin: 0 auto;
+}
+
+#gauge-container .k-slider {
+    margin-top: -11px;
+    width: 140px;
+}
+
+#gauge2-container {
+    // background: transparent url("../content/dataviz/gauge/gauge-container-partial.png") no-repeat 50% 50%;
+
+    text-align: center;
+    margin: 0 auto 30px auto;
+}
+
+#gauge2 {
+
+    margin: 0 auto;
+}
+
+#gauge2-container .k-slider {
+    margin-top: -11px;
+    width: 140px;
+}

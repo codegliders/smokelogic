@@ -7,7 +7,7 @@
 <html class="no-js"><!--<![endif]-->
     <!--html lang="en"-->
     <head>
-        <title><?php echo 'MetaMatic SmokeLogic '; //trans('messages.webapp_title');   ?></title>
+        <title><?php echo 'Zeno - The last cigarette list'; //trans('messages.webapp_title');   ?></title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -38,8 +38,9 @@
 
 
         <script src="{{ asset('assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-        <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css'"/>
+        <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css"/>
         <!--kendo-->
+           
         <script src="{{ asset('assets/lib/kendo/js/kendo.core.min.js')}}"></script>
         <script src="{{ asset('assets/lib/kendo/js/kendo.data.min.js')}}"></script>
         <script src="{{ asset('assets/lib/kendo/js/kendo.userevents.min.js')}}"></script>
@@ -48,6 +49,7 @@
         <script src="{{ asset('assets/lib/kendo/js/kendo.dataviz.core.min.js')}}"></script>
         <script src="{{ asset('assets/lib/kendo/js/kendo.dataviz.themes.min.js')}}"></script>
         <script src="{{ asset('assets/lib/kendo/js/kendo.dataviz.chart.min.js')}}"></script>
+         <script src="{{ asset('assets/lib/kendo/js/kendo.dataviz.gauge.min.js')}}"></script>
         <script src="{{ asset('assets/lib/kendo/js/kendo.pdf.min.js')}}"></script>
 
 
@@ -58,11 +60,11 @@
             <div class="page-header">
                 <div class="row" style="position:relative">
                     <div class="col col-md-9 col-sm-9 col-xs-12" style="color:#fff;">
-                        <h3 > <span class="fa fa-cloud fa-lg" ></span>
-                            <?php echo 'SmokeLogic'; //trans('messages.glucologic'); ?>
-                        </h3>
+                        <h2 > <span class="fa fa-cloud fa-lg" ></span>
+                            <?php echo 'Zeno'; //trans('messages.glucologic'); ?>
+                        </h2>
 
-                        <?php echo 'Take control of cigarettes you smoke'; //trans('messages.motto'); ?>
+                        <h5><?php echo 'The last cigarette list'; //trans('messages.motto'); ?></h5>
                     </div>
                     <div class="col col-md-3 col-sm-12 col-xs-12" style="bottom:0;
                          right:0;color:#fff;">

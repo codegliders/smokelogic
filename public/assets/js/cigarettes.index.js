@@ -1,8 +1,8 @@
 $(function () {
 
-$(window).on("resize", function () {
-    $("#chart").data("kendoChart").refresh();
-});
+    $(window).on("resize", function () {
+        $("#chart").data("kendoChart").refresh();
+    });
     $('#date-cont').html(moment().format('MMMM Do YYYY, hh:mm:ss a'));
 
     function createChart() {
@@ -32,7 +32,7 @@ $(window).on("resize", function () {
             series: [{
                     field: "cigarettes",
                     name: "Cigarettes",
-                    color:" #37abc8"
+                    color: " #37abc8"
                 }],
             categoryAxis: {
                 field: "date",
@@ -69,7 +69,71 @@ $(window).on("resize", function () {
 
     $(document).ready(createChart);
     $(document).bind("kendo:skinChange", createChart);
+
+
+
 });
+/*
+//gauge
+
+function createGauge() {
+    $("#gauge").kendoRadialGauge({
+        pointer: {
+            value: $("#gauge-value").val()
+        },
+        scale: {
+            minorUnit: 5,
+            startAngle: -30,
+            endAngle: 210,
+            max: 240
+        }
+    });
+}
+
+function createGauge2() {
+    $("#gauge2").kendoRadialGauge({
+        pointer: {
+            value: $("#gauge2-value").val()
+        },
+        scale: {
+            minorUnit: 5,
+            startAngle: -30,
+            endAngle: 210,
+            max: 240
+        }
+    });
+}
+$(document).ready(function () {
+    createGauge();
+   createGauge2();
+    function updateValue() {
+        $("#gauge").data("kendoRadialGauge").value($("#gauge-value").val());
+    }
+
+    if (kendo.ui.Slider) {
+        $("#gauge-value").kendoSlider({
+            min: 0,
+            max: 240,
+            showButtons: false,
+            change: updateValue
+        });
+    } else {
+        $("#gauge-value").change(updateValue);
+    }
+
+
+    $(document).bind("kendo:skinChange", function (e) {
+        createGauge();
+    });
+});
+
+
+$(window).resize(function(){
+   var gauge = $("#gauge").data("kendoRadialGauge");
+    var gauge2 = $("#gauge2").data("kendoRadialGauge");
+   gauge.resize();
+   gauge2.resize();
+})*/
 
 $(document).ready(function () {
 

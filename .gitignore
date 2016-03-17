@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 /public/storage
+/nbroject
 Homestead.yaml
 Homestead.json
 .env

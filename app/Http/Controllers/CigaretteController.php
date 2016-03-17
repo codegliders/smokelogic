@@ -41,15 +41,22 @@ class CigaretteController extends Controller {
         $count=  Cigarette::getTodayCigarettes();
 
            $weekCigarettes=Cigarette::getWeekCigarettes();
+           $yesterdayCigarettes=  Cigarette::getYesterdayCigarettes();
         $monthCigarettes=Cigarette::getMonthCigarettes();
+        $minutecigarettes=Cigarette::getCigarettesInMintesDuringDay();
+       // $lastcigarettemin=  Cigarette::getCigarettesLastMinutes();
+       // dd($lastcigarettemin);
         $cigarettes=DB::table('cigarettes')->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(15);
-       // dd($cigarettes);
+      
         return view('cigarettes.index', [
             //'cigarettes' => $this->cigarettes->forUser($request->user()),
             'cigarettes' => $cigarettes,
             'count'=>$count,
             'weekcigarettes'=>$weekCigarettes,
-            'monthcigarettes'=>$monthCigarettes,
+            'yesterdaycigarettes'=>$yesterdayCigarettes,
+              'monthcigarettes'=>$monthCigarettes,
+            'minutesbycigarettes'=>$minutecigarettes,
+            
         ]);
     }
 
