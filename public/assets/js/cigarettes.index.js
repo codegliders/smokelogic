@@ -56,6 +56,21 @@ $(function () {
             }
         });
     }
+    
+    $('#cigarettes-table .btn-danger').click(function (e) {
+        e.preventDefault();
+        id = $(this).attr('data-id');
+        var message = 'Are you sure you want to delete this cigarette?';
+        var msg = confirm(message);
+        //console.log("OK"+msg);
+        if (msg) {
+              console.log("OK"+msg);
+          $.get('cig/' + id, function (data) {
+
+              location.reload();
+           });
+        }
+    });
 
     $("#btnaddcig").click(function () {
 

@@ -31,7 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 //cigarette route
     Route::get('/cig', 'CigaretteController@index');
     Route::post('/cig', 'CigaretteController@store');
-    Route::delete('/cig/{cig}', 'CigaretteController@destroy');
+    Route::get('/cig/{cig}', 'CigaretteController@destroy');
 
 //bar chart data
     Route::get('getpiechartdatalasttwoweeks', 'CigaretteController@getBarChartDataLastTwoWeeks');

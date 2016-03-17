@@ -100,7 +100,7 @@
         </div>
 
         <div class="panel-body">
-            <table class="table table-striped task-table">
+            <table class="table table-striped task-table" id="cigarettes-table">
 
                 <!-- Table Headings -->
                 <thead>
@@ -130,7 +130,7 @@
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
 
-                                <button class="btn btn-danger">Delete Cigarette</button>
+                                <button class="btn btn-danger" data-id="{{ $cigarette->id }}">Delete Cigarette</button>
                             </form>
                         </td>
                     <tr>
